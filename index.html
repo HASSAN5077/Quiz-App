@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #1abc9c;
+        }
+
+        header h2 {
+            font-size: 40px;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            width: 700px;
+            height: 400px;
+            position: relative;
+            background: #00cec9;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container .number {
+            width: 100%;
+            text-align: center;
+            font-size: 100px;
+            color: #fff;
+        }
+
+        .choice {
+            margin: 0 80px;
+        }
+
+        input {
+            padding: 10px;
+            text-align: center;
+            font-size: 22px;
+            border: none;
+            outline: none;
+            border-radius: 30px;
+        }
+
+        button {
+            position: absolute;
+            right: 50px;
+            padding: 9px 15px;
+            border: none;
+            outline: none;
+            margin-left: 15px;
+            font-size: 25px;
+            text-transform: capitalize;
+            letter-spacing: 2px;
+            background: #2ecc71;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+            border-radius: 50px;
+            color: #fff;
+        }
+
+        .msg {
+            position: absolute;
+            bottom: 90px;
+            background: #34495e;
+            width: 700px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 30px;
+        }
+
+        .score {
+            position: absolute;
+            right: 30px;
+            width: 150px;
+            height: 60px;
+            top: 120px;
+            background: #2c3e50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>Math Questions</h2>
+    </header>
+    <div class="score">Score: &nbsp;<span id="score"> 0</span></div>
+    <div class="container">
+        <div class="number">
+            <span class="num1">0</span>
+            <span class="choice">+</span>
+            <span class="num2">0</span>
+        </div>
+        <div class="input">
+            <input type="number">
+            <button>check</button>
+        </div>
+    </div>
+    <h2 class="msg"></h2>
+    <script>
+
+        const game = () => {
+            var score = document.getElementById('score');
+            let userScore = 0;
+            var number1 = Math.floor(Math.random() * 30);
+            var number2 = Math.floor(Math.random() * 30);
+            const operator = ["+", "-", "*"];
+            let randNum = Math.floor(Math.random() * operator.length);
+            // var op = document.querySelector('.choice');
+            // op.innerHTML = operator[randNum]
+            var btn = document.querySelector('button');
+            var answer;
+            document.querySelector('.num1').innerHTML = number1;
+            document.querySelector('.num2').innerHTML = number2;
+            // answer = `number1 ${operator[randNum]} number2`;
+            answer = number1 + number2;
+            console.log(answer);
+            btn.onclick = () => {
+                if (document.querySelector('input').value == answer) {
+                    userScore=userScore+1;
+                    document.querySelector('.msg').innerHTML = `Awesome. Your Answer in correct ${answer}`;
+                    document.querySelector('input').value = "";
+
+                    score.innerHTML = userScore;
+                    game();
+                }
+                else {
+                    document.querySelector('.msg').innerHTML = "Sorry. Your answer is incorrect";
+                    // userScore = 0;
+                    // score.innerHTML = userScore;
+                }
+            }
+        };
+        game();
+    </script>
+</body>
+
+</html>
